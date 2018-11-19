@@ -39,4 +39,10 @@ public class BaseDao {
     protected <T> T queryForObject(String sql, Class<T> clazz, Object obj) {
         return sqlExecutor.queryForObject(sql, clazz, obj);
     }
+
+    protected void addIfNotNull(String str, Object object, String str2) {
+        if (object != null) {
+            str += str2;
+        }
+    }
 }
