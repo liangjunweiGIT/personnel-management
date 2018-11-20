@@ -24,7 +24,7 @@ public class EmpDaoImpl extends BaseDao implements EmpDao {
         return emp.getId();*/
 
         //第二种写法: 使用带after参数的insert方法 注意查询结果列名要设置为跟主键名一直("as id") 给emp对象id赋值的操作会在SqlExecutor内部实现
-        return super.insert("insert into t_emp(dept_id,post_id) values(#deptId#,#postId#)", emp,
+        return insert("insert into t_emp(dept_id,post_id) values(#deptId#,#postId#)", emp,
                 "select emp_tb_seq.currval as id from dual");
     }
 
@@ -44,6 +44,6 @@ public class EmpDaoImpl extends BaseDao implements EmpDao {
         addIfNotNull(sql, emp.getId(), "and id = #id#");
         addIfNotNull(sql, emp.getDeptId(), "and dept_id = #deptId#");
         addIfNotNull(sql, emp.getPostId(), "and post_id = #postId#");
-        return super.queryForList(sql, Emp.class, emp);
+        return queryForList(sql, Emp.class, emp);
     }
 }

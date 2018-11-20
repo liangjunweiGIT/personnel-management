@@ -14,7 +14,7 @@ public class DeptDaoImpl extends BaseDao implements DeptDao {
 
     @Override
     public List<Dept> queryList(Dept dept) {
-        return super.queryForList("select * from t_dept", Dept.class, dept);
+        return queryForList("select * from t_dept", Dept.class, dept);
     }
 
     @Override
