@@ -23,7 +23,7 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public int insertDept(Dept dept) {
+    public Long insertDept(Dept dept) {
         return deptDao.insert(dept);
     }
 

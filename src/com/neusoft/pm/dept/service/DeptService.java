@@ -17,7 +17,7 @@ public interface DeptService {
      */
     List<Dept> queryDeptList(Dept dept);
 
-    int insertDept(Dept dept);
+    Long insertDept(Dept dept);
 
     int updateDept(Dept dept);
 
