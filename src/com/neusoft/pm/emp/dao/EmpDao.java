@@ -9,7 +9,7 @@ import java.util.List;
  * @Author Created by junwei.liang on 2018/11/19 13:17
  */
 public interface EmpDao {
-    int insert(Emp emp);
+    Long insert(Emp emp);
 
     int update(Emp emp);
 

@@ -18,6 +18,15 @@ public interface SqlExecutor {
     int insert(String sql, Object obj);
 
     /**
+     * 自增主键的插入(主键类型为Long)
+     *
+     * @param sql sql语句
+     * @param obj 查询条件
+     * @return 主键
+     */
+    Long insert(String sql, Object obj, String after);
+
+    /**
      * 修改
      *
      * @param sql sql语句

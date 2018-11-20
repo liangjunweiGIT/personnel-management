@@ -16,6 +16,10 @@ public class BaseDao {
         return sqlExecutor.insert(sql, obj);
     }
 
+    protected Long insert(String sql, Object obj, String after) {
+        return sqlExecutor.insert(sql, obj, after);
+    }
+
     protected int update(String sql, Object obj) {
         return sqlExecutor.update(sql, obj);
     }

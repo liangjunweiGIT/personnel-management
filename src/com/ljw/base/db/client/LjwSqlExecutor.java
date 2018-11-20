@@ -12,6 +12,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,18 @@ public class LjwSqlExecutor implements SqlExecutor {
     @Override
     public int insert(String sql, Object obj) {
         return update(sql, obj);
+    }
+
+    @Override
+    public Long insert(String sql, Object obj, String after) {
+        if (update(sql, obj) == 0) {
+            return null;
+        }
+        Map<String, Object> map = this.queryForObject(after, Map.class);
+        Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
+        Map.Entry<String, Object> entry = iterator.next();
+        ClassUtil.setFieldValueByName(obj, Long.class, entry.getKey(), entry.getValue());
+        return Long.valueOf(entry.getValue().toString());
     }
 
     @Override

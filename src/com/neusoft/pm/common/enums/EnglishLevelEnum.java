@@ -1,7 +1,5 @@
 package com.neusoft.pm.common.enums;
 
-import com.ljw.test.enums.IsDeleteEnum;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
