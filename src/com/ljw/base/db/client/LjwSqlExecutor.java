@@ -95,7 +95,13 @@ public class LjwSqlExecutor implements SqlExecutor {
     @Override
     public <T> T queryForObject(String sql, Class<T> clazz, Object obj) {
         List<T> list = queryForList(sql, clazz, obj);
-        return CollectionUtil.isEmpty(list) ? null : list.get(0);
+        if (CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+        if (list.size() > 1) {
+            throw new RuntimeException("查询返回行数大于1");
+        }
+        return list.get(0);
     }
 
     /**
