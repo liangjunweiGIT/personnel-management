@@ -39,7 +39,7 @@ public class LjwSqlExecutor implements SqlExecutor {
         }
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
         Map.Entry<String, Object> entry = iterator.next();
-        ClassUtil.setFieldValueByName(obj, Long.class, entry.getKey(), entry.getValue());
+        ClassUtil.setFieldValueByName(obj, ClassUtil.getFiledMapByClass(obj.getClass()).get(entry.getKey()), entry.getKey(), entry.getValue());
         return Long.valueOf(entry.getValue().toString());
     }
 
