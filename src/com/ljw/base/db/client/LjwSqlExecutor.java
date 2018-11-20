@@ -34,6 +34,9 @@ public class LjwSqlExecutor implements SqlExecutor {
             return null;
         }
         Map<String, Object> map = this.queryForObject(after, Map.class);
+        if (map.isEmpty()) {
+            throw new RuntimeException(after + "语句未查询到自增主键的值,请检查sql或数据库设置");
+        }
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
         Map.Entry<String, Object> entry = iterator.next();
         ClassUtil.setFieldValueByName(obj, Long.class, entry.getKey(), entry.getValue());

@@ -18,8 +18,8 @@ public class DeptDaoImpl extends BaseDao implements DeptDao {
     }
 
     @Override
-    public int insert(Dept dept) {
-        return 0;
+    public Long insert(Dept dept) {
+        return insert("insert into dept() values()",dept,"select dept_tb_seq.currval as id from dual");
     }
 
     @Override

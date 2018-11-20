@@ -11,7 +11,7 @@ import java.util.List;
 public interface DeptDao {
     List<Dept> queryList(Dept dept);
 
-    int insert(Dept dept);
+    Long insert(Dept dept);
 
     int update(Dept dept);
 
