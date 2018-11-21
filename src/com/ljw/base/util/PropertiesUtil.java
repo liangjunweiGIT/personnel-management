@@ -7,7 +7,7 @@ import java.util.Properties;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 17:12
  */
-public class PropertiesUtils {
+public class PropertiesUtil {
     private static Properties prop;
 
     static {

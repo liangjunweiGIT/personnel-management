@@ -41,7 +41,7 @@ public class EmpDaoImpl extends BaseDao implements EmpDao {
 
     @Override
     public List<EmpVo> queryEmpByCondition(EmpVo emp) {
-        String sql = "select * from t_emp where 1=1 ";
+        String sql = "select * from t_emp where 1=1";
         addIfNotNull(sql, emp.getId(), "and id = #id#");
         addIfNotNull(sql, emp.getDeptId(), "and dept_id = #deptId#");
         addIfNotNull(sql, emp.getPostId(), "and post_id = #postId#");

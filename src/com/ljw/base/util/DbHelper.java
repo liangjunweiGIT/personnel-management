@@ -16,11 +16,11 @@ public class DbHelper {
     /**
      * 核心连接数
      */
-    private static final int CORE_SIZE = Integer.parseInt(PropertiesUtils.getString("CORE_SIZE"));
+    private static final int CORE_SIZE = Integer.parseInt(PropertiesUtil.getString("CORE_SIZE"));
     /**
      * 最大连接数
      */
-    private static final int MAX_SIZE = Integer.parseInt(PropertiesUtils.getString("MAX_SIZE"));
+    private static final int MAX_SIZE = Integer.parseInt(PropertiesUtil.getString("MAX_SIZE"));
     /**
      * 线程安全的（同步）
      */
@@ -39,7 +39,7 @@ public class DbHelper {
             e.printStackTrace();
         }
         try {
-            Class.forName(PropertiesUtils.getString("DRIVER"));
+            Class.forName(PropertiesUtil.getString("DRIVER"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,9 +48,9 @@ public class DbHelper {
     private static Connection createConnection() {
         Connection con = null;
         try {
-            con = DriverManager.getConnection(PropertiesUtils.getString("URL"),
-                    PropertiesUtils.getString("USER"),
-                    PropertiesUtils.getString("PASSWORD"));
+            con = DriverManager.getConnection(PropertiesUtil.getString("URL"),
+                    PropertiesUtil.getString("USER"),
+                    PropertiesUtil.getString("PASSWORD"));
             CURRENT_POOL_SIZE.getAndIncrement();
         } catch (SQLException e) {
             e.printStackTrace();

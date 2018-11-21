@@ -1,6 +1,8 @@
 package com.ljw.test.mgr;
 
-import com.ljw.base.util.PropertiesUtils;
+import com.ljw.base.ioc.annotation.Autowired;
+import com.ljw.base.ioc.annotation.Bean;
+import com.ljw.base.util.PropertiesUtil;
 import com.ljw.test.enums.IsDeleteEnum;
 import com.ljw.test.pojo.LjwDvd;
 import com.ljw.test.service.LjwDvdService;
@@ -11,8 +13,10 @@ import java.util.Scanner;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 17:12
  */
+@Bean
 public class DvdMgr {
-    private LjwDvdService dvdService = (LjwDvdService) PropertiesUtils.getObject("LJW_DVD_SERVICE");
+    @Autowired
+    private LjwDvdService dvdService;
 
     private Scanner sc = new Scanner(System.in);
 

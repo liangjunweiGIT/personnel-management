@@ -1,6 +1,7 @@
 package com.ljw.test.dao.impl;
 
 import com.ljw.base.db.BaseDao;
+import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.test.dao.LjwDvdDao;
 import com.ljw.test.pojo.LjwDvd;
@@ -12,6 +13,7 @@ import java.util.List;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 18:22
  */
+@Bean
 public class LjwDvdDaoImpl extends BaseDao implements LjwDvdDao {
     @Override
     public List<DvdVo> queryDVDList() {

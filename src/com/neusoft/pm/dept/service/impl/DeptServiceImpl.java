@@ -1,11 +1,12 @@
 package com.neusoft.pm.dept.service.impl;
 
-import com.ljw.base.util.PropertiesUtils;
+import com.ljw.base.ioc.annotation.Bean;
+import com.ljw.base.ioc.annotation.Service;
+import com.ljw.base.util.PropertiesUtil;
 import com.neusoft.pm.dept.dao.DeptDao;
 import com.neusoft.pm.dept.pojo.Dept;
 import com.neusoft.pm.dept.service.DeptService;
 import com.neusoft.pm.emp.dao.EmpDao;
-import com.neusoft.pm.emp.pojo.Emp;
 import com.neusoft.pm.emp.vo.EmpVo;
 
 import java.util.List;
@@ -14,9 +15,10 @@ import java.util.List;
  * @Description: 部门业务层 自行添加业务规则
  * @Author Created by junwei.liang on 2018/11/19 13:25
  */
+@Bean
 public class DeptServiceImpl implements DeptService {
-    private DeptDao deptDao = (DeptDao) PropertiesUtils.getObject("DeptDao");
-    private EmpDao empDao = (EmpDao) PropertiesUtils.getObject("EmpDao");
+    private DeptDao deptDao = (DeptDao) PropertiesUtil.getObject("DeptDao");
+    private EmpDao empDao = (EmpDao) PropertiesUtil.getObject("EmpDao");
 
     @Override
     public List<Dept> queryDeptList(Dept dept) {

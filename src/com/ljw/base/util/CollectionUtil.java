@@ -1,5 +1,7 @@
 package com.ljw.base.util;
 
+import com.ljw.base.ioc.annotation.Bean;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -49,5 +51,17 @@ public class CollectionUtil {
             count++;
         }
         return count;
+    }
+
+    public static boolean isNullOrEmpty(Object object) {
+        return object == null;
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || "".equals(str);
+    }
+
+    public static boolean isNullOrEmpty(Object arr[]) {
+        return arr == null || arr.length == 0;
     }
 }

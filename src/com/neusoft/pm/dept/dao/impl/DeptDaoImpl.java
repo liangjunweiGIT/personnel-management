@@ -1,6 +1,7 @@
 package com.neusoft.pm.dept.dao.impl;
 
 import com.ljw.base.db.BaseDao;
+import com.ljw.base.ioc.annotation.Bean;
 import com.neusoft.pm.dept.dao.DeptDao;
 import com.neusoft.pm.dept.pojo.Dept;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @Description:
  * @Author Created by junwei.liang on 2018/11/19 13:20
  */
+@Bean
 public class DeptDaoImpl extends BaseDao implements DeptDao {
 
     @Override

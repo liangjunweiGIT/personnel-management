@@ -1,8 +1,10 @@
 package com.ljw.test.service.impl;
 
+import com.ljw.base.ioc.annotation.Autowired;
+import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DateUtil;
-import com.ljw.base.util.PropertiesUtils;
+import com.ljw.base.util.PropertiesUtil;
 import com.ljw.test.dao.LjwDvdDao;
 import com.ljw.test.dao.LjwLendDao;
 import com.ljw.test.dao.LjwTypeDao;
@@ -22,10 +24,13 @@ import java.util.Map;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 17:12
  */
+@Bean
 public class LjwDvdServiceImpl implements LjwDvdService {
-    private LjwDvdDao dvdDao = (LjwDvdDao) PropertiesUtils.getObject("LJW_DVD_DAO");
-    private LjwLendDao lendDao = (LjwLendDao) PropertiesUtils.getObject("LJW_LEND_DAO");
-    private LjwTypeDao typeDao = (LjwTypeDao) PropertiesUtils.getObject("LJW_TYPE_DAO");
+    @Autowired
+    private LjwDvdDao dvdDao;
+    //private LjwDvdDao dvdDao = (LjwDvdDao) PropertiesUtil.getObject("LJW_DVD_DAO");
+    private LjwLendDao lendDao = (LjwLendDao) PropertiesUtil.getObject("LJW_LEND_DAO");
+    private LjwTypeDao typeDao = (LjwTypeDao) PropertiesUtil.getObject("LJW_TYPE_DAO");
 
     @Override
     public boolean addDVD(LjwDvd dvd) {

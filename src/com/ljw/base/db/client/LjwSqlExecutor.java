@@ -1,7 +1,7 @@
 package com.ljw.base.db.client;
 
 import com.ljw.base.db.pojo.SqlModel;
-import com.ljw.base.db.reflect.ClassUtil;
+import com.ljw.base.util.ClassUtil;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DbHelper;
 
@@ -151,7 +151,7 @@ public class LjwSqlExecutor implements SqlExecutor {
         if (clazz == null || clazz.equals(Map.class)) {
             return (List<T>) resultMapList;
         }
-        Map<String, Class> filedMap = ClassUtil.getFiledMapByClass(clazz);
+        Map<String, Class<?>> filedMap = ClassUtil.getFiledMapByClass(clazz);
         for (Map<String, Object> map : resultMapList) {
             T obj = clazz.getConstructor().newInstance();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
