@@ -1,7 +1,7 @@
 package com.neusoft.pm.emp.pojo;
 
 /**
- * @Description: 员工信息 自行添加其他属性
+ * @Description: 员工信息 自行添加其他属性 和主表字段一一对应
  * @Author Created by junwei.liang on 2018/11/19 13:23
  */
 public class Emp {

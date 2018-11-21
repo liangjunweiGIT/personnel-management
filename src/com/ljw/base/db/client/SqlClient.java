@@ -42,4 +42,7 @@ class SqlClient {
         return columnName;
     }
 
+    void limitSql(String sql, int start, int end) {
+        sql += "limit " + start + "," + end;
+    }
 }

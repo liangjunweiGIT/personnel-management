@@ -34,7 +34,7 @@ public class LjwSqlExecutor implements SqlExecutor {
             return null;
         }
         Map<String, Object> map = this.queryForObject(after, Map.class);
-        if (map.isEmpty()) {
+        if (map == null || map.isEmpty()) {
             throw new RuntimeException(after + "语句未查询到自增主键的值,请检查sql或数据库设置");
         }
         Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
@@ -102,6 +102,20 @@ public class LjwSqlExecutor implements SqlExecutor {
             throw new RuntimeException("查询返回行数大于1");
         }
         return list.get(0);
+    }
+
+    @Override
+    public <T> List<T> queryForLimit(String sql, Class<T> clazz, int start, int end) {
+        return queryForLimit(sql, clazz, null, start, end);
+    }
+
+    @Override
+    public <T> List<T> queryForLimit(String sql, Class<T> clazz, Object obj, int start, int end) {
+        if (start > end) {
+            throw new RuntimeException("分页语句错误:起始位的值不能超过截止位");
+        }
+        sqlClient.limitSql(sql, start, end);
+        return queryForList(sql, clazz, obj);
     }
 
     /**

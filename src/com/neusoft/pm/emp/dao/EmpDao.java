@@ -1,6 +1,7 @@
 package com.neusoft.pm.emp.dao;
 
 import com.neusoft.pm.emp.pojo.Emp;
+import com.neusoft.pm.emp.vo.EmpVo;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface EmpDao {
      * @param emp
      * @return
      */
-    List<Emp> queryEmpByCondition(Emp emp);
+    List<EmpVo> queryEmpByCondition(EmpVo emp);
 }

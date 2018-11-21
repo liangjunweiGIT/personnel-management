@@ -55,7 +55,7 @@ public interface SqlExecutor {
     <T> List<T> queryForList(String sql, Class<T> clazz);
 
     /**
-     * 查列表
+     * 带查询条件的查列表
      *
      * @param sql   sql语句
      * @param clazz 结果对象类
@@ -76,13 +76,38 @@ public interface SqlExecutor {
     <T> T queryForObject(String sql, Class<T> clazz);
 
     /**
-     * 查单个对象
+     * 带查询条件的查单个对象
      *
      * @param sql   sql语句
      * @param clazz 结果对象类
-     * @param obj   结果对象类型
+     * @param obj   查询条件
      * @param <T>   结果对象类型
      * @return 返回结果对象
      */
     <T> T queryForObject(String sql, Class<T> clazz, Object obj);
+
+    /**
+     * 分页查询列表
+     *
+     * @param sql   select语句
+     * @param clazz 结果对象类
+     * @param start 数据起始位置
+     * @param end   数据截止位
+     * @param <T>   结果对象类型
+     * @return 返回结果对象
+     */
+    <T> List<T> queryForLimit(String sql, Class<T> clazz, int start, int end);
+
+    /**
+     * 带查询条件的分页查询列表
+     *
+     * @param sql   select语句
+     * @param clazz 结果对象类
+     * @param obj   查询条件
+     * @param start 数据起始位置
+     * @param end   数据截止位
+     * @param <T>   结果对象类型
+     * @return 返回结果对象
+     */
+    <T> List<T> queryForLimit(String sql, Class<T> clazz, Object obj, int start, int end);
 }

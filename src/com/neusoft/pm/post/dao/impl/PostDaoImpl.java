@@ -1,6 +1,5 @@
 package com.neusoft.pm.post.dao.impl;
 
-import com.neusoft.pm.dept.pojo.Dept;
 import com.neusoft.pm.post.dao.PostDao;
 import com.neusoft.pm.post.pojo.Post;
 
@@ -18,8 +17,8 @@ public class PostDaoImpl implements PostDao {
     }
 
     @Override
-    public int insert(Post post) {
-        return 0;
+    public Long insert(Post post) {
+        return null;
     }
 
     @Override

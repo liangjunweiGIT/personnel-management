@@ -12,7 +12,7 @@ import java.util.List;
 public interface PostDao {
     List<Post> queryList(Post post);
 
-    int insert(Post post);
+    Long insert(Post post);
 
     int update(Post post);
 

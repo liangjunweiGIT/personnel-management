@@ -3,6 +3,7 @@ package com.neusoft.pm.emp.dao.impl;
 import com.ljw.base.db.BaseDao;
 import com.neusoft.pm.emp.dao.EmpDao;
 import com.neusoft.pm.emp.pojo.Emp;
+import com.neusoft.pm.emp.vo.EmpVo;
 
 import java.util.List;
 import java.util.Map;
@@ -39,11 +40,11 @@ public class EmpDaoImpl extends BaseDao implements EmpDao {
     }
 
     @Override
-    public List<Emp> queryEmpByCondition(Emp emp) {
+    public List<EmpVo> queryEmpByCondition(EmpVo emp) {
         String sql = "select * from t_emp where 1=1 ";
         addIfNotNull(sql, emp.getId(), "and id = #id#");
         addIfNotNull(sql, emp.getDeptId(), "and dept_id = #deptId#");
         addIfNotNull(sql, emp.getPostId(), "and post_id = #postId#");
-        return queryForList(sql, Emp.class, emp);
+        return queryForList(sql, EmpVo.class, emp);
     }
 }

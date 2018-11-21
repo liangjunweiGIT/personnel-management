@@ -44,6 +44,14 @@ public class BaseDao {
         return sqlExecutor.queryForObject(sql, clazz, obj);
     }
 
+    protected <T> List<T> queryForLimit(String sql, Class<T> clazz, int start, int end) {
+        return sqlExecutor.queryForLimit(sql, clazz, start, end);
+    }
+
+    protected <T> List<T> queryForLimit(String sql, Class<T> clazz, Object obj, int start, int end) {
+        return sqlExecutor.queryForLimit(sql, clazz, obj, start, end);
+    }
+
     protected void addIfNotNull(String str, Object object, String str2) {
         if (object != null) {
             str += str2;
