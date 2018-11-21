@@ -54,7 +54,7 @@ public class BaseDao {
 
     protected void addIfNotNull(String str, Object object, String str2) {
         if (object != null) {
-            str += str2;
+            str += " " + str2 + " ";
         }
     }
 }

@@ -2,6 +2,7 @@ package com.neusoft.pm.dept.service;
 
 import com.neusoft.pm.dept.pojo.Dept;
 import com.neusoft.pm.emp.pojo.Emp;
+import com.neusoft.pm.emp.vo.EmpVo;
 
 import java.util.List;
 
@@ -23,5 +24,5 @@ public interface DeptService {
 
     int deleteDept(Long id);
 
-    List<Emp> queryEmpByDeptId(Long deptId);
+    List<EmpVo> queryEmpByDeptId(Long deptId);
 }

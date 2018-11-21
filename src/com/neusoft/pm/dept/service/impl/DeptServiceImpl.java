@@ -6,6 +6,7 @@ import com.neusoft.pm.dept.pojo.Dept;
 import com.neusoft.pm.dept.service.DeptService;
 import com.neusoft.pm.emp.dao.EmpDao;
 import com.neusoft.pm.emp.pojo.Emp;
+import com.neusoft.pm.emp.vo.EmpVo;
 
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public List<Emp> queryEmpByDeptId(Long deptId) {
-        Emp emp = new Emp();
+    public List<EmpVo> queryEmpByDeptId(Long deptId) {
+        EmpVo emp = new EmpVo();
         emp.setDeptId(deptId);
         return empDao.queryEmpByCondition(emp);
     }
