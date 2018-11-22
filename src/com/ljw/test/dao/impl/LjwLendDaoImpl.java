@@ -1,6 +1,7 @@
 package com.ljw.test.dao.impl;
 
 import com.ljw.base.db.BaseDao;
+import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.util.DateUtil;
 import com.ljw.test.dao.LjwLendDao;
 import com.ljw.test.pojo.LjwLend;
@@ -11,6 +12,7 @@ import java.util.UUID;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 18:22
  */
+@Bean
 public class LjwLendDaoImpl extends BaseDao implements LjwLendDao {
     @Override
     public int addLendDVD(Long id) {

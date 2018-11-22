@@ -1,8 +1,7 @@
 package com.neusoft.pm.dept.service.impl;
 
+import com.ljw.base.ioc.annotation.Autowired;
 import com.ljw.base.ioc.annotation.Bean;
-import com.ljw.base.ioc.annotation.Service;
-import com.ljw.base.util.PropertiesUtil;
 import com.neusoft.pm.dept.dao.DeptDao;
 import com.neusoft.pm.dept.pojo.Dept;
 import com.neusoft.pm.dept.service.DeptService;
@@ -17,8 +16,10 @@ import java.util.List;
  */
 @Bean
 public class DeptServiceImpl implements DeptService {
-    private DeptDao deptDao = (DeptDao) PropertiesUtil.getObject("DeptDao");
-    private EmpDao empDao = (EmpDao) PropertiesUtil.getObject("EmpDao");
+    @Autowired
+    private DeptDao deptDao;
+    @Autowired
+    private EmpDao empDao;
 
     @Override
     public List<Dept> queryDeptList(Dept dept) {

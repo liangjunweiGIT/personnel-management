@@ -1,5 +1,6 @@
 package com.ljw.test.service;
 
+import com.ljw.base.aop.annotation.Transactional;
 import com.ljw.test.pojo.LjwDvd;
 import com.ljw.test.vo.DvdVo;
 
@@ -16,6 +17,7 @@ public interface LjwDvdService {
      * @param dvd
      * @return
      */
+    @Transactional
     boolean addDVD(LjwDvd dvd);
 
     /**

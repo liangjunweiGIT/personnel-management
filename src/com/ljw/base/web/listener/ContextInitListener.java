@@ -12,18 +12,7 @@ import javax.servlet.ServletContextListener;
 public class ContextInitListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println("IOC容器启动...");
-        InitRun initRun = new InitRun();
-        try {
-            System.out.println("初始化Bean...");
-            initRun.initClass();
-            System.out.println("初始化Bean结束");
-            System.out.println("依赖注入...");
-            initRun.initField();
-            System.out.println("依赖注入结束");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        InitRun.start();
     }
 
     @Override

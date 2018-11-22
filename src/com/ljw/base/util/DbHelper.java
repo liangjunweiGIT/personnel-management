@@ -29,6 +29,10 @@ public class DbHelper {
      * 当前总连接数(原子性int)
      */
     private static AtomicInteger CURRENT_POOL_SIZE = new AtomicInteger(0);
+    /**
+     * 存放本地线程变量 用于共享Connection的事务
+     */
+    private static final ThreadLocal<Connection> THREAD_LOCAL = new ThreadLocal<>();
 
     static {
         try {
@@ -87,5 +91,31 @@ public class DbHelper {
     public static void close(Connection con) {
         POOL.add(con);
     }
+
+    public static void beginTransaction() throws SQLException {
+        Connection connection = getConnection();
+        connection.setAutoCommit(false);
+        THREAD_LOCAL.set(connection);
+    }
+
+    public static Connection getTransactionConnection() {
+        return THREAD_LOCAL.get();
+    }
+
+    public static void commit() throws SQLException {
+        THREAD_LOCAL.get().commit();
+    }
+
+    public static void rollback() throws SQLException {
+        THREAD_LOCAL.get().rollback();
+    }
+
+    public static void closeForTransaction() throws SQLException {
+        Connection connection = THREAD_LOCAL.get();
+        THREAD_LOCAL.remove();
+        connection.setAutoCommit(true);
+        close(connection);
+    }
+
 
 }

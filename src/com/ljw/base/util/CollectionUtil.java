@@ -53,10 +53,6 @@ public class CollectionUtil {
         return count;
     }
 
-    public static boolean isNullOrEmpty(Object object) {
-        return object == null;
-    }
-
     public static boolean isNullOrEmpty(String str) {
         return str == null || "".equals(str);
     }
@@ -64,4 +60,5 @@ public class CollectionUtil {
     public static boolean isNullOrEmpty(Object arr[]) {
         return arr == null || arr.length == 0;
     }
+
 }

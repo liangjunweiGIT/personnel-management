@@ -1,6 +1,7 @@
 package com.ljw.test.dao.impl;
 
 import com.ljw.base.db.BaseDao;
+import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.test.dao.LjwTypeDao;
 import com.ljw.test.pojo.LjwType;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 18:22
  */
+@Bean
 public class LjwTypeDaoImpl extends BaseDao implements LjwTypeDao {
 
     @Override

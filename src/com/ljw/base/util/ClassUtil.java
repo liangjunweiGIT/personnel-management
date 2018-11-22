@@ -1,11 +1,16 @@
 package com.ljw.base.util;
 
+import com.ljw.base.aop.proxy.TransactionInvocationHandler;
+import com.neusoft.pm.common.enums.EnglishLevelEnum;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +21,23 @@ import java.util.Map;
  * @Author Created by junwei.liang on 2018/10/31 19:05
  */
 public class ClassUtil {
+    /**
+     * 根据类对象获取实体类所有属性
+     */
+    public static List<Field> getAllFiledClass(Class clazz) {
+        List<Field> fieldList = new ArrayList<>();
+        Field[] fields = clazz.getDeclaredFields();
+        Collections.addAll(fieldList, fields);
+        while (true) {
+            clazz = clazz.getSuperclass();
+            if (clazz.equals(Object.class)) {
+                return fieldList;
+            }
+            fields = clazz.getDeclaredFields();
+            Collections.addAll(fieldList, fields);
+        }
+    }
+
     /**
      * 根据类对象获取实体类所有属性名和属性类型
      */
@@ -97,11 +119,11 @@ public class ClassUtil {
 
     /**
      * @param c 接口
-     * @return List<Class<?>>    实现接口的所有类
+     * @return List<Class>    实现接口的所有类
      * @Description: 根据一个接口返回该接口的所有类
      */
     @SuppressWarnings("unchecked")
-    public static List<Class<?>> getAllClassByInterface(Class c) {
+    public static List<Class<?>> getAllClassByInterface(Class<?> c) {
         List returnClassList = new ArrayList<Class<?>>();
         //判断是不是接口,不是接口不作处理
         if (c.isInterface()) {
@@ -148,7 +170,7 @@ public class ClassUtil {
 
     private static List<Class<?>> findClass(File directory, String packageName)
             throws ClassNotFoundException {
-        List<Class<?>> classes = new ArrayList<Class<?>>();
+        List<Class<?>> classes = new ArrayList<>();
         if (!directory.exists()) {
             return classes;
         }
@@ -184,6 +206,23 @@ public class ClassUtil {
             }
         }
         return returnClassList;
+    }
+
+    /**
+     * 从代理中获取被被代理对象
+     *
+     * @param proxy 代理
+     * @return
+     * @throws Exception
+     */
+    public static Object getTarget(Object proxy) throws Exception {
+        Field field = proxy.getClass().getSuperclass().getDeclaredField("h");
+        field.setAccessible(true);
+        //获取指定对象中此字段的值
+        TransactionInvocationHandler invocationHandler = (TransactionInvocationHandler) field.get(proxy); //获取Proxy对象中的此字段的值
+        Field target = invocationHandler.getClass().getDeclaredField("target");
+        target.setAccessible(true);
+        return target.get(invocationHandler);
     }
 
 }

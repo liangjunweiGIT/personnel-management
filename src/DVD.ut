@@ -14,3 +14,4 @@ LJW_TYPE_DAO=com.ljw.test.dao.impl.LjwTypeDaoImpl
 
 DeptDao=com.neusoft.pm.dept.dao.impl.DeptDaoImpl
 EmpDao=com.neusoft.pm.emp.dao.impl.EmpDaoImpl
+

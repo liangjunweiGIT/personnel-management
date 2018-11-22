@@ -2,6 +2,8 @@ package com.ljw.base.db;
 
 import com.ljw.base.db.client.LjwSqlExecutor;
 import com.ljw.base.db.client.SqlExecutor;
+import com.ljw.base.ioc.annotation.Autowired;
+import com.ljw.base.ioc.annotation.Bean;
 
 import java.util.List;
 
@@ -10,7 +12,8 @@ import java.util.List;
  * @Author Created by junwei.liang on 2018/10/31 12:58
  */
 public class BaseDao {
-    private final SqlExecutor sqlExecutor = new LjwSqlExecutor();
+    @Autowired(beanName = "sqlExecutor")
+    private SqlExecutor sqlExecutor;
 
     protected int insert(String sql, Object obj) {
         return sqlExecutor.insert(sql, obj);

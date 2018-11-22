@@ -18,7 +18,6 @@ public class DemoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         //将外语水平列表传到jsp
         request.setAttribute("englishLevelList", EnglishLevelEnum.getEnumList());
         request.getRequestDispatcher("****.jsp").forward(request, response);

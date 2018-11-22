@@ -1,10 +1,11 @@
 package com.ljw.test.service.impl;
 
+import com.ljw.base.aop.annotation.Transactional;
 import com.ljw.base.ioc.annotation.Autowired;
 import com.ljw.base.ioc.annotation.Bean;
+import com.ljw.base.ioc.annotation.Service;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DateUtil;
-import com.ljw.base.util.PropertiesUtil;
 import com.ljw.test.dao.LjwDvdDao;
 import com.ljw.test.dao.LjwLendDao;
 import com.ljw.test.dao.LjwTypeDao;
@@ -24,17 +25,19 @@ import java.util.Map;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/30 17:12
  */
-@Bean
+@Service
 public class LjwDvdServiceImpl implements LjwDvdService {
     @Autowired
     private LjwDvdDao dvdDao;
     //private LjwDvdDao dvdDao = (LjwDvdDao) PropertiesUtil.getObject("LJW_DVD_DAO");
-    private LjwLendDao lendDao = (LjwLendDao) PropertiesUtil.getObject("LJW_LEND_DAO");
-    private LjwTypeDao typeDao = (LjwTypeDao) PropertiesUtil.getObject("LJW_TYPE_DAO");
+    @Autowired
+    private LjwLendDao lendDao;
+    @Autowired
+    private LjwTypeDao typeDao;
 
     @Override
     public boolean addDVD(LjwDvd dvd) {
-        return dvdDao.addDVD(dvd) == 1;
+        return dvdDao.addDVD(dvd)==1;
     }
 
     @Override
@@ -59,6 +62,8 @@ public class LjwDvdServiceImpl implements LjwDvdService {
         return true;
     }
 
+
+    @Transactional
     @Override
     public boolean lendDVD(Long id) {
         LjwDvd dvd = dvdDao.getDVDById(id);

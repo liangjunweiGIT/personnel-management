@@ -1,6 +1,8 @@
 package com.ljw.base.db.client;
 
 import com.ljw.base.db.pojo.SqlModel;
+import com.ljw.base.ioc.annotation.Autowired;
+import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.util.ClassUtil;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DbHelper;
@@ -20,8 +22,9 @@ import java.util.Map;
  * @Description:
  * @Author Created by junwei.liang on 2018/10/31 13:44
  */
+@Bean(name = "sqlExecutor")
 public class LjwSqlExecutor implements SqlExecutor {
-    private final SqlClient sqlClient = new SqlClient();
+    private SqlClient sqlClient = new SqlClient();
 
     @Override
     public int insert(String sql, Object obj) {
@@ -46,7 +49,12 @@ public class LjwSqlExecutor implements SqlExecutor {
     @Override
     public int update(String sql, Object obj) {
         SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
-        Connection con = DbHelper.getConnection();
+        Connection con = DbHelper.getTransactionConnection();
+        boolean isTransaction = true;
+        if (con == null) {
+            con = DbHelper.getConnection();
+            isTransaction = false;
+        }
         try {
             PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
             setPreparedStatement(ps, sqlModel, obj);
@@ -54,7 +62,9 @@ public class LjwSqlExecutor implements SqlExecutor {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DbHelper.close(con);
+            if (!isTransaction) {
+                DbHelper.close(con);
+            }
         }
         return 0;
     }
@@ -72,7 +82,12 @@ public class LjwSqlExecutor implements SqlExecutor {
     @Override
     public <T> List<T> queryForList(String sql, Class<T> clazz, Object obj) {
         SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
-        Connection con = DbHelper.getConnection();
+        Connection con = DbHelper.getTransactionConnection();
+        boolean isTransaction = true;
+        if (con == null) {
+            con = DbHelper.getConnection();
+            isTransaction = false;
+        }
         List<T> list = null;
         try {
             PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
@@ -82,7 +97,9 @@ public class LjwSqlExecutor implements SqlExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DbHelper.close(con);
+            if (!isTransaction) {
+                DbHelper.close(con);
+            }
         }
         return list;
     }

@@ -2,7 +2,6 @@ package com.ljw.test.mgr;
 
 import com.ljw.base.ioc.annotation.Autowired;
 import com.ljw.base.ioc.annotation.Bean;
-import com.ljw.base.util.PropertiesUtil;
 import com.ljw.test.enums.IsDeleteEnum;
 import com.ljw.test.pojo.LjwDvd;
 import com.ljw.test.service.LjwDvdService;

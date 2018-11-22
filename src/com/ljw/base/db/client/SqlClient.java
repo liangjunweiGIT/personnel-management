@@ -1,6 +1,7 @@
 package com.ljw.base.db.client;
 
 import com.ljw.base.db.pojo.SqlModel;
+import com.ljw.base.ioc.annotation.Bean;
 
 import java.util.HashMap;
 import java.util.Map;
