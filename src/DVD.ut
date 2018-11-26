@@ -5,13 +5,3 @@ PASSWORD=root
 
 CORE_SIZE=10
 MAX_SIZE=100
-
-LJW_DVD_MGR=com.ljw.test.mgr.DvdMgr
-LJW_DVD_SERVICE=com.ljw.test.service.impl.LjwDvdServiceImpl
-LJW_DVD_DAO=com.ljw.test.dao.impl.LjwDvdDaoImpl
-LJW_LEND_DAO=com.ljw.test.dao.impl.LjwLendDaoImpl
-LJW_TYPE_DAO=com.ljw.test.dao.impl.LjwTypeDaoImpl
-
-DeptDao=com.neusoft.pm.dept.dao.impl.DeptDaoImpl
-EmpDao=com.neusoft.pm.emp.dao.impl.EmpDaoImpl
-

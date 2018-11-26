@@ -53,11 +53,11 @@ public class CollectionUtil {
         return count;
     }
 
-    public static boolean isNullOrEmpty(String str) {
+    public static boolean isEmpty(String str) {
         return str == null || "".equals(str);
     }
 
-    public static boolean isNullOrEmpty(Object arr[]) {
+    public static boolean isEmpty(Object[] arr) {
         return arr == null || arr.length == 0;
     }
 

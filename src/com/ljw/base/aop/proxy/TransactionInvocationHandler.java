@@ -3,7 +3,6 @@ package com.ljw.base.aop.proxy;
 import com.ljw.base.aop.annotation.Transactional;
 import com.ljw.base.util.DbHelper;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 

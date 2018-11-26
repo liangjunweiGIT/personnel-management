@@ -9,8 +9,6 @@ import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.SacnUtil;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Proxy;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +29,7 @@ public class InitRun {
                 continue;
             }
             String beanName = bean.name();
-            if (CollectionUtil.isNullOrEmpty(beanName)) {
+            if (CollectionUtil.isEmpty(beanName)) {
                 beanName = cla.getName();
             }
             if (BeanContainer.BEAN_MAP.containsKey(beanName)) {
@@ -49,7 +47,7 @@ public class InitRun {
                 continue;
             }
             String beanName = service.name();
-            if (CollectionUtil.isNullOrEmpty(beanName)) {
+            if (CollectionUtil.isEmpty(beanName)) {
                 beanName = cla.getName();
             }
             if (BeanContainer.BEAN_MAP.containsKey(beanName)) {
@@ -76,7 +74,7 @@ public class InitRun {
                     continue;
                 }
                 String beanName = resource.beanName();
-                if (CollectionUtil.isNullOrEmpty(beanName)) {
+                if (CollectionUtil.isEmpty(beanName)) {
                     beanName = field.getType().getName();
                 }
                 Object writeValue = null;

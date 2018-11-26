@@ -17,6 +17,7 @@ import java.io.IOException;
 public class CharsetEncodingFilter implements Filter {
     private static String ENCODING;
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         // 设置字符编码链锁
@@ -25,12 +26,13 @@ public class CharsetEncodingFilter implements Filter {
         chain.doFilter(request, response);
     }
 
-    // 初始化
+    @Override
     public void init(FilterConfig config) throws ServletException {
         // 接收web.xml配置文件中的初始参数
         ENCODING = config.getInitParameter("CharsetEncoding");
     }
 
+    @Override
     public void destroy() {
     }
 }

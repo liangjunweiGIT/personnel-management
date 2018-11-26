@@ -1,8 +1,6 @@
 package com.ljw.test.service.impl;
 
-import com.ljw.base.aop.annotation.Transactional;
 import com.ljw.base.ioc.annotation.Autowired;
-import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.ioc.annotation.Service;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DateUtil;
@@ -37,7 +35,7 @@ public class LjwDvdServiceImpl implements LjwDvdService {
 
     @Override
     public boolean addDVD(LjwDvd dvd) {
-        return dvdDao.addDVD(dvd)==1;
+        return dvdDao.addDVD(dvd) == 1;
     }
 
     @Override
@@ -58,12 +56,9 @@ public class LjwDvdServiceImpl implements LjwDvdService {
     public boolean delete(Long id) {
         ArrayList<Long> list = new ArrayList<>();
         list.add(id);
-        dvdDao.deleteDVD(list);
-        return true;
+        return dvdDao.deleteDVD(list) > 0;
     }
 
-
-    @Transactional
     @Override
     public boolean lendDVD(Long id) {
         LjwDvd dvd = dvdDao.getDVDById(id);

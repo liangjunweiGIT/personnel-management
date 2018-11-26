@@ -17,7 +17,6 @@ public interface LjwDvdService {
      * @param dvd
      * @return
      */
-    @Transactional
     boolean addDVD(LjwDvd dvd);
 
     /**
@@ -41,6 +40,7 @@ public interface LjwDvdService {
      * @param id
      * @return
      */
+    @Transactional
     boolean lendDVD(Long id);
 
     /**
@@ -50,6 +50,7 @@ public interface LjwDvdService {
      * @param date
      * @return
      */
+    @Transactional
     boolean returnDVD(Long id, String date);
 
 

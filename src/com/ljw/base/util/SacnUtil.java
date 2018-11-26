@@ -10,8 +10,9 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
-/*
- * 一个工具类，获取指定包下的所有文件
+/**
+ * @Description: 一个工具类，获取指定包下的所有文件
+ * @Author Created by junwei.liang on 2018/11/21 16:05
  */
 public class SacnUtil {
     /**
