@@ -8,6 +8,7 @@ import com.ljw.base.util.ClassUtil;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.SacnUtil;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -69,33 +70,43 @@ public class InitRun {
                 continue;
             }
             for (Field field : fields) {
-                Autowired resource = field.getAnnotation(Autowired.class);
-                if (resource == null) {
-                    continue;
+                String beanName = null;
+                Autowired autowired = field.getAnnotation(Autowired.class);
+                if (autowired != null) {
+                    beanName = autowired.beanName();
+                } else {
+                    Resource resource = field.getAnnotation(Resource.class);
+                    if (resource == null) {
+                        continue;
+                    }
+                    beanName = resource.name();
                 }
-                String beanName = resource.beanName();
                 if (CollectionUtil.isEmpty(beanName)) {
                     beanName = field.getType().getName();
                 }
-                Object writeValue = null;
-                field.setAccessible(true);
-                if (BeanContainer.BEAN_MAP.containsKey(beanName)) {
-                    writeValue = BeanContainer.BEAN_MAP.get(beanName);
-                } else if (field.getType().toString().contains("interface ")) {
-                    List<Class<?>> allClassByInterface = ClassUtil.getAllClassByInterface(field.getType());
-                    for (Class<?> clazz : allClassByInterface) {
-                        if (BeanContainer.BEAN_MAP.containsKey(clazz.getName())) {
-                            writeValue = BeanContainer.BEAN_MAP.get(clazz.getName());
-                            break;
-                        }
-                    }
-                } else {
-                    writeValue = field.getType().newInstance();
-                    BeanContainer.BEAN_MAP.put(beanName, writeValue);
-                }
-                field.set(obj, writeValue);
+                setField(obj, field, beanName);
             }
         }
+    }
+
+    private void setField(Object obj, Field field, String beanName) throws Exception {
+        Object writeValue = null;
+        field.setAccessible(true);
+        if (BeanContainer.BEAN_MAP.containsKey(beanName)) {
+            writeValue = BeanContainer.BEAN_MAP.get(beanName);
+        } else if (field.getType().toString().contains("interface ")) {
+            List<Class<?>> allClassByInterface = ClassUtil.getAllClassByInterface(field.getType());
+            for (Class<?> clazz : allClassByInterface) {
+                if (BeanContainer.BEAN_MAP.containsKey(clazz.getName())) {
+                    writeValue = BeanContainer.BEAN_MAP.get(clazz.getName());
+                    break;
+                }
+            }
+        } else {
+            writeValue = field.getType().newInstance();
+            BeanContainer.BEAN_MAP.put(beanName, writeValue);
+        }
+        field.set(obj, writeValue);
     }
 
     public static void start() {

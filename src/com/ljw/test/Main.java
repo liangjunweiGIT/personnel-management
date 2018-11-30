@@ -9,7 +9,6 @@ public class Main {
         InitRun.start();
 
         DvdMgr d = (DvdMgr) BeanContainer.getBean(DvdMgr.class);
-        assert d != null;
         d.Menu();
     }
 

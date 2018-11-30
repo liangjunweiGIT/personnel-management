@@ -14,6 +14,7 @@ import com.ljw.test.pojo.LjwType;
 import com.ljw.test.service.LjwDvdService;
 import com.ljw.test.vo.DvdVo;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +26,12 @@ import java.util.Map;
  */
 @Service
 public class LjwDvdServiceImpl implements LjwDvdService {
-    @Autowired
+    @Resource
     private LjwDvdDao dvdDao;
     //private LjwDvdDao dvdDao = (LjwDvdDao) PropertiesUtil.getObject("LJW_DVD_DAO");
-    @Autowired
+    @Resource
     private LjwLendDao lendDao;
-    @Autowired
+    @Resource
     private LjwTypeDao typeDao;
 
     @Override
