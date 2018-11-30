@@ -33,6 +33,10 @@ public class DbHelper {
      * 存放本地线程变量 用于共享Connection的事务
      */
     private static final ThreadLocal<Connection> THREAD_LOCAL = new ThreadLocal<>();
+    /**
+     * 存放是否可以回收事务连接的标记 每在一个事务的方法里嵌套一个事务方法标记就会加一 当标记为零时表示可以回收
+     */
+    private static final ThreadLocal<AtomicInteger> THREAD_LOCAL_FLAG = new ThreadLocal<>();
 
     static {
         try {
@@ -93,9 +97,17 @@ public class DbHelper {
     }
 
     public static void beginTransaction() throws SQLException {
-        Connection connection = getConnection();
-        connection.setAutoCommit(false);
-        THREAD_LOCAL.set(connection);
+        if (THREAD_LOCAL.get() == null) {
+            Connection connection = getConnection();
+            connection.setAutoCommit(false);
+            THREAD_LOCAL.set(connection);
+        } else {
+            if (THREAD_LOCAL_FLAG.get() == null) {
+                THREAD_LOCAL_FLAG.set(new AtomicInteger(0));
+            } else {
+                THREAD_LOCAL_FLAG.get().getAndIncrement();
+            }
+        }
     }
 
     public static Connection getTransactionConnection() {
@@ -111,10 +123,14 @@ public class DbHelper {
     }
 
     public static void closeForTransaction() throws SQLException {
-        Connection connection = THREAD_LOCAL.get();
-        THREAD_LOCAL.remove();
-        connection.setAutoCommit(true);
-        close(connection);
+        if (THREAD_LOCAL_FLAG.get() == null || THREAD_LOCAL_FLAG.get().intValue() == 0) {
+            Connection connection = THREAD_LOCAL.get();
+            THREAD_LOCAL.remove();
+            connection.setAutoCommit(true);
+            close(connection);
+        } else {
+            THREAD_LOCAL_FLAG.get().getAndDecrement();
+        }
     }
 
 

@@ -147,7 +147,7 @@ public class ClassUtil {
     }
 
     /**
-     * @param pageName 包名
+     * @param packageName 包名
      * @return List<Class<?>>    包下所有类
      * @Description: 根据包名获得该包以及子包下的所有类不查找jar包中的
      */
