@@ -12,12 +12,14 @@ import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @Description:
  * @Author Created by junwei.liang on 2018/11/21 16:05
  */
 public class InitRun {
+    private static final Logger LOGGER = Logger.getGlobal();
 
     private InitRun() {
     }
@@ -111,18 +113,18 @@ public class InitRun {
 
     public static void start() {
         if (!BeanContainer.BEAN_MAP.isEmpty()) {
-            System.out.println("容器已经启动!");
+            LOGGER.info("容器已经启动!");
             return;
         }
-        System.out.println("IOC容器启动...");
+        LOGGER.info("IOC容器启动...");
         InitRun initRun = new InitRun();
         try {
-            System.out.println("初始化Bean...");
+            LOGGER.info("初始化Bean...");
             initRun.initClass();
             initRun.initServiceClass();
-            System.out.println("依赖注入...");
+            LOGGER.info("依赖注入...");
             initRun.initField();
-            System.out.println("依赖加载完毕");
+            LOGGER.info("依赖加载完毕");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("IOC容器启动失败!");

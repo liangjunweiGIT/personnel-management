@@ -5,6 +5,7 @@ import com.ljw.base.ioc.annotation.Bean;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +30,7 @@ class SqlClient {
         SqlModel sqlModel = new SqlModel();
         sqlModel.setSql(sql);
         sqlModel.setProperties(map);
+        Logger.getGlobal().info("执行sql: " + sql);
         return sqlModel;
     }
 

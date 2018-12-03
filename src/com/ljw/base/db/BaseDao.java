@@ -5,6 +5,7 @@ import com.ljw.base.db.client.SqlExecutor;
 import com.ljw.base.ioc.annotation.Autowired;
 import com.ljw.base.ioc.annotation.Bean;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @Author Created by junwei.liang on 2018/10/31 12:58
  */
 public class BaseDao {
-    @Autowired(beanName = "sqlExecutor")
+    @Resource(name = "sqlExecutor")
     private SqlExecutor sqlExecutor;
 
     protected int insert(String sql, Object obj) {
@@ -55,9 +56,22 @@ public class BaseDao {
         return sqlExecutor.queryForLimit(sql, clazz, obj, start, end);
     }
 
-    protected void addIfNotNull(String str, Object object, String str2) {
+    protected String addIfNotNull(String sql, Object object, String addStr) {
         if (object != null) {
-            str += " " + str2 + " ";
+            sql += " " + addStr + " ";
         }
+        return sql;
     }
+
+    protected static String checkSql(String sql) {
+        if (sql == null || sql.length() == 0) {
+            return sql;
+        }
+        sql = sql.trim();
+        if (sql.endsWith(",")) {
+            sql = sql.substring(0, sql.length() - 1);
+        }
+        return sql;
+    }
+
 }
