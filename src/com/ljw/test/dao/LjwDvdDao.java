@@ -11,6 +11,17 @@ import java.util.List;
  */
 public interface LjwDvdDao {
     /**
+     * 查询dvd列表总数
+     * @return
+     */
+    Long queryDvdCount();
+    /**
+     * 查询一列数据
+     *
+     * @return DVD列表
+     */
+    List<Long> queryDVDidList();
+    /**
      * 查询DVD列表
      *
      * @return DVD列表

@@ -10,9 +10,9 @@ import java.util.Map;
 public class BeanContainer {
     static Map<String, Object> BEAN_MAP = new HashMap<>();
 
-    public static Object getBean(Class cla) {
+    public static <T> T getBean(Class<T> cla) {
         String beanName = cla.getName();
-        return BEAN_MAP.get(beanName);
+        return (T) BEAN_MAP.get(beanName);
     }
 
     public static Object getBean(String beanName) {

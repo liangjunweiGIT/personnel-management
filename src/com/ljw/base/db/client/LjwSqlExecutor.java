@@ -164,6 +164,9 @@ public class LjwSqlExecutor implements SqlExecutor {
      */
     private <T> List<T> getResultList(ResultSet rs, Class<T> clazz) throws Exception {
         List<T> list = new ArrayList<>();
+        if (ClassUtil.isPrimitive(clazz)) {
+            return getOnlyResult(rs, clazz);
+        }
         List<Map<String, Object>> resultMapList = getResultMapList(rs);
         if (clazz == null || clazz.equals(Map.class)) {
             return (List<T>) resultMapList;
@@ -195,6 +198,30 @@ public class LjwSqlExecutor implements SqlExecutor {
                 rowData.put(sqlClient.column2Property(md.getColumnLabel(i)), rs.getObject(i));
             }
             list.add(rowData);
+        }
+        return list;
+    }
+
+    /**
+     * 获取基本类型的唯一结果
+     *
+     * @param rs
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws SQLException
+     */
+    private <T> List<T> getOnlyResult(ResultSet rs, Class<T> clazz) throws SQLException {
+        List<T> list = new ArrayList<>();
+        //获取键名
+        ResultSetMetaData md = rs.getMetaData();
+        //获取行的数量
+        int columnCount = md.getColumnCount();
+        if (columnCount > 1) {
+            throw new RuntimeException("查询返回行数大于1");
+        }
+        while (rs.next()) {
+            list.add((T) rs.getObject(1));
         }
         return list;
     }

@@ -110,10 +110,18 @@ public class ClassUtil {
      * 或者String||StringBuffer||StringBuilder
      */
     public static boolean isPrimitive(Object obj) {
+        return isPrimitive(obj.getClass());
+    }
+
+    /**
+     * 判断一个对象是否是基本类型或基本类型的封装类型
+     * 或者String||StringBuffer||StringBuilder
+     */
+    public static boolean isPrimitive(Class<?> clazz) {
         try {
-            return ((Class<?>) obj.getClass().getField("TYPE").get(null)).isPrimitive();
+            return ((Class<?>) clazz.getField("TYPE").get(null)).isPrimitive();
         } catch (Exception e) {
-            return String.class.equals(obj.getClass()) || StringBuffer.class.equals(obj.getClass()) || StringBuilder.class.equals(obj.getClass());
+            return String.class.equals(clazz) || StringBuffer.class.equals(clazz) || StringBuilder.class.equals(clazz);
         }
     }
 

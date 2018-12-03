@@ -16,6 +16,16 @@ import java.util.List;
 @Bean
 public class LjwDvdDaoImpl extends BaseDao implements LjwDvdDao {
     @Override
+    public Long queryDvdCount() {
+        return super.queryForObject("select count(*) from t_dvd", Long.class);
+    }
+
+    @Override
+    public List<Long> queryDVDidList() {
+        return super.queryForList("select id from t_dvd order by id", Long.class);
+    }
+
+    @Override
     public List<DvdVo> queryDVDList() {
         return queryForList("SELECT td.*,tl.lend_date,tt.name as typeName FROM t_dvd td LEFT JOIN t_lend tl on (td.id=tl.dvd_id AND tl.return_date=null)" +
                 "LEFT JOIN t_type tt on td.type_id = tt.id WHERE is_delete=0 ORDER BY td.count DESC, td.id ASC", DvdVo.class);
