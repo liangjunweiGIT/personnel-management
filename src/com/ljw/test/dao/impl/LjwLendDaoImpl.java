@@ -17,10 +17,9 @@ public class LjwLendDaoImpl extends BaseDao implements LjwLendDao {
     @Override
     public int addLendDVD(Long id) {
         LjwLend lend = new LjwLend();
-        lend.setId(Long.valueOf(UUID.randomUUID().toString().replace("-", "")));
         lend.setDvdId(id);
         lend.setLendDate(DateUtil.getNowDateStr());
-        return insert("INSERT INTO t_lend VALUES(#id#,#dvdId#,#lendDate#,null,null)", lend);
+        return insert("INSERT INTO t_lend(dvd_id,lend_date) VALUES(#dvdId#,#lendDate#)", lend);
     }
 
     @Override

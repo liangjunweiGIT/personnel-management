@@ -31,6 +31,7 @@ public class TransactionInvocationHandler implements InvocationHandler {
             DbHelper.commit();
         } catch (Exception e) {
             DbHelper.rollback();
+            throw e;
         } finally {
             DbHelper.closeForTransaction();
         }
