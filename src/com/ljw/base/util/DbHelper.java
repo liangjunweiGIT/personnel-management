@@ -28,7 +28,7 @@ public class DbHelper {
     /**
      * 当前总连接数(原子性int)
      */
-    private static AtomicInteger CURRENT_POOL_SIZE = new AtomicInteger(0);
+    private static final AtomicInteger CURRENT_POOL_SIZE = new AtomicInteger(0);
     /**
      * 存放本地线程变量 用于共享Connection的事务
      */
