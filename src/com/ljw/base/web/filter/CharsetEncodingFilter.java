@@ -1,7 +1,5 @@
 package com.ljw.base.web.filter;
 
-import com.ljw.base.util.PropertiesUtil;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

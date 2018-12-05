@@ -1,12 +1,10 @@
 package com.ljw.base.util;
 
 import com.ljw.base.aop.proxy.TransactionInvocationHandler;
-import com.neusoft.pm.common.enums.EnglishLevelEnum;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -210,7 +208,7 @@ public class ClassUtil {
                     }
                 }
             } catch (Exception e) {
-                // TODO: handle exception
+                e.printStackTrace();
             }
         }
         return returnClassList;

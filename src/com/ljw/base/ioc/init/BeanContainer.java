@@ -10,6 +10,7 @@ import java.util.Map;
 public class BeanContainer {
     static Map<String, Object> BEAN_MAP = new HashMap<>();
 
+    @SuppressWarnings("unchecked")
     public static <T> T getBean(Class<T> cla) {
         String beanName = cla.getName();
         return (T) BEAN_MAP.get(beanName);
