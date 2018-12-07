@@ -17,7 +17,7 @@ import java.io.IOException;
  * @Author Created by junwei.liang on 2018/11/19 14:30
  */
 @Bean
-@WebServlet(urlPatterns = "demo")
+@WebServlet(urlPatterns = "/demo")
 public class DemoController extends HttpServlet {
 
     @Autowired

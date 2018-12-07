@@ -12,13 +12,13 @@ public interface SqlExecutor {
      * 插入
      *
      * @param sql sql语句
-     * @param obj 查询条件
+     * @param obj 插入对象 支持list 如果传入的是list<Object>类型则批量插入
      * @return 插入条数
      */
     int insert(String sql, Object obj);
 
     /**
-     * 自增主键的插入(主键类型为Long)
+     * 自增主键的插入(主键类型为Long) 只能插入一条
      *
      * @param sql   sql语句
      * @param obj   查询条件

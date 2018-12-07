@@ -28,6 +28,28 @@ public class LjwSqlExecutor implements SqlExecutor {
 
     @Override
     public int insert(String sql, Object obj) {
+        if (obj instanceof List) {
+            Connection con = DbHelper.getTransactionConnection();
+            boolean isTransaction = true;
+            if (con == null) {
+                con = DbHelper.getConnection();
+                isTransaction = false;
+            }
+            try {
+                int count = 0;
+                for (Object object : (List) obj) {
+                    count += executeUpdate(sql, object, con);
+                }
+                return count;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (!isTransaction) {
+                    DbHelper.close(con);
+                }
+            }
+            return 0;
+        }
         return update(sql, obj);
     }
 
@@ -48,7 +70,6 @@ public class LjwSqlExecutor implements SqlExecutor {
 
     @Override
     public int update(String sql, Object obj) {
-        SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
         Connection con = DbHelper.getTransactionConnection();
         boolean isTransaction = true;
         if (con == null) {
@@ -56,9 +77,7 @@ public class LjwSqlExecutor implements SqlExecutor {
             isTransaction = false;
         }
         try {
-            PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
-            setPreparedStatement(ps, sqlModel, obj);
-            return ps.executeUpdate();
+            return executeUpdate(sql, obj, con);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -133,6 +152,22 @@ public class LjwSqlExecutor implements SqlExecutor {
         }
         sqlClient.limitSql(sql, start, end);
         return queryForList(sql, clazz, obj);
+    }
+
+    /**
+     * 执行executeUpdate
+     *
+     * @param sql
+     * @param obj
+     * @param con
+     * @return
+     * @throws SQLException
+     */
+    private int executeUpdate(String sql, Object obj, Connection con) throws SQLException {
+        SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
+        PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
+        setPreparedStatement(ps, sqlModel, obj);
+        return ps.executeUpdate();
     }
 
     /**
