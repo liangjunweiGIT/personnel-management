@@ -51,4 +51,9 @@ public class LjwDvdDaoImpl extends BaseDao implements LjwDvdDao {
     public LjwDvd getDVDById(Long id) {
         return queryForObject("select * from t_dvd where id=#id# AND is_delete=0", LjwDvd.class, id);
     }
+
+    @Override
+    public int addDVDList(List<LjwDvd> dvdList) {
+        return insert("insert into t_dvd values(#id#,#name#,0,#status#,#count#,#typeId#,0)", dvdList);
+    }
 }

@@ -9,7 +9,8 @@ import java.util.Date;
  * @Author Created by junwei.liang on 2018/10/30 18:04
  */
 public class DateUtil {
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 判断Date类型相差天数
@@ -24,9 +25,10 @@ public class DateUtil {
      * @return 如果有异常则返回null
      */
     public static Integer differentDaysByString(String dateStr1, String dateStr2) {
+        final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
         try {
-            Date date1 = FORMAT.parse(dateStr1);
-            Date date2 = FORMAT.parse(dateStr2);
+            Date date1 = format.parse(dateStr1);
+            Date date2 = format.parse(dateStr2);
             return differentDaysByDate(date1, date2);
         } catch (ParseException e) {
             System.out.println("日期格式不正确");
@@ -36,6 +38,7 @@ public class DateUtil {
     }
 
     public static String getNowDateStr() {
-        return FORMAT.format(new Date());
+        final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+        return format.format(new Date());
     }
 }

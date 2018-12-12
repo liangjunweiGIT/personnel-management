@@ -11,6 +11,7 @@ import java.util.List;
  * @Author Created by junwei.liang on 2018/10/30 17:04
  */
 public interface LjwDvdService {
+    void test();
     /**
      * 增加一张DVD
      *

@@ -5,6 +5,7 @@ import com.ljw.base.ioc.annotation.Bean;
 import com.webtest.pm.common.enums.EnglishLevelEnum;
 import com.webtest.pm.emp.service.EmpService;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/demo")
 public class DemoController extends HttpServlet {
 
-    @Autowired
+    @Resource
     private EmpService empService;
 
     @Override

@@ -1,6 +1,5 @@
 package com.ljw.test.service.impl;
 
-import com.ljw.base.ioc.annotation.Autowired;
 import com.ljw.base.ioc.annotation.Service;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.base.util.DateUtil;
@@ -12,6 +11,7 @@ import com.ljw.test.pojo.LjwDvd;
 import com.ljw.test.pojo.LjwLend;
 import com.ljw.test.pojo.LjwType;
 import com.ljw.test.service.LjwDvdService;
+import com.ljw.test.service.TestService;
 import com.ljw.test.vo.DvdVo;
 
 import javax.annotation.Resource;
@@ -33,6 +33,14 @@ public class LjwDvdServiceImpl implements LjwDvdService {
     private LjwLendDao lendDao;
     @Resource
     private LjwTypeDao typeDao;
+    @Resource
+    private TestService testService;
+
+    @Override
+    public void test() {
+        System.out.println("im dvd");
+        testService.sy();
+    }
 
     @Override
     public boolean addDVD(LjwDvd dvd) {

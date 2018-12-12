@@ -59,5 +59,12 @@ public interface LjwDvdDao {
      * @return DVD
      */
     LjwDvd getDVDById(Long id);
+    /**
+     * 批量插入dvd
+     *
+     * @param dvdList DVD
+     * @return 修改条数
+     */
+    int addDVDList(List<LjwDvd> dvdList);
 
 }
