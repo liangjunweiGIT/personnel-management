@@ -1,7 +1,7 @@
 package com.ljw.test.dao;
 
 import com.ljw.test.pojo.LjwDvd;
-import com.ljw.test.vo.DvdVo;
+import com.ljw.test.vo.DvdVO;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public interface LjwDvdDao {
      *
      * @return DVD列表
      */
-    List<DvdVo> queryDVDList();
+    List<DvdVO> queryDVDList();
 
     /**
      * 新增DVD
@@ -66,5 +66,7 @@ public interface LjwDvdDao {
      * @return 修改条数
      */
     int addDVDList(List<LjwDvd> dvdList);
+
+    DvdVO queryDVDById(Long id);
 
 }

@@ -210,7 +210,7 @@ public class LjwSqlExecutor implements SqlExecutor {
         for (Map<String, Object> map : resultMapList) {
             T obj = clazz.getConstructor().newInstance();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                ClassUtil.setFieldValueByName(obj, filedMap.get(entry.getKey()), entry.getKey(), map.get(entry.getKey()));
+                ClassUtil.setFieldValueByName(obj, filedMap.get(entry.getKey()), entry.getKey(), entry.getValue());
             }
             list.add(obj);
         }

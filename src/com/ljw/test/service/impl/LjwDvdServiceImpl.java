@@ -12,7 +12,7 @@ import com.ljw.test.pojo.LjwLend;
 import com.ljw.test.pojo.LjwType;
 import com.ljw.test.service.LjwDvdService;
 import com.ljw.test.service.TestService;
-import com.ljw.test.vo.DvdVo;
+import com.ljw.test.vo.DvdVO;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -48,13 +48,13 @@ public class LjwDvdServiceImpl implements LjwDvdService {
     }
 
     @Override
-    public List<DvdVo> showAllDVD() {
-        List<DvdVo> list = dvdDao.queryDVDList();
+    public List<DvdVO> showAllDVD() {
+        List<DvdVO> list = dvdDao.queryDVDList();
         if (CollectionUtil.isEmpty(list)) {
             System.out.println("没有查询出DVD记录");
         } else {
             System.out.println(CollectionUtil.filterStr("\t\t", "序号", "状态", "名称", "借出日期"));
-            for (DvdVo dvd : list) {
+            for (DvdVO dvd : list) {
                 System.out.println(CollectionUtil.filterStr("\t\t", dvd.getId(), LendStatusEnum.getEnumByCode(dvd.getStatus()), dvd.getName(), dvd.getLendDate()));
             }
         }

@@ -5,7 +5,7 @@ import com.ljw.base.ioc.annotation.Bean;
 import com.ljw.base.util.CollectionUtil;
 import com.ljw.test.dao.LjwDvdDao;
 import com.ljw.test.pojo.LjwDvd;
-import com.ljw.test.vo.DvdVo;
+import com.ljw.test.vo.DvdVO;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ public class LjwDvdDaoImpl extends BaseDao implements LjwDvdDao {
     }
 
     @Override
-    public List<DvdVo> queryDVDList() {
+    public List<DvdVO> queryDVDList() {
         return queryForList("SELECT td.*,tl.lend_date,tt.name as typeName FROM t_dvd td LEFT JOIN t_lend tl on (td.id=tl.dvd_id AND tl.return_date=null)" +
-                "LEFT JOIN t_type tt on td.type_id = tt.id WHERE is_delete=0 ORDER BY td.count DESC, td.id ASC", DvdVo.class);
+                "LEFT JOIN t_type tt on td.type_id = tt.id WHERE is_delete=0 ORDER BY td.count DESC, td.id ASC", DvdVO.class);
     }
 
     @Override
@@ -55,5 +55,10 @@ public class LjwDvdDaoImpl extends BaseDao implements LjwDvdDao {
     @Override
     public int addDVDList(List<LjwDvd> dvdList) {
         return insert("insert into t_dvd values(#id#,#name#,0,#status#,#count#,#typeId#,0)", dvdList);
+    }
+
+    @Override
+    public DvdVO queryDVDById(Long id) {
+        return queryForObject("select t_dvd.*,t_type.name as type_name from t_dvd left join t_type on t_dvd.type_id = t_type.id where t_dvd.id=#id# AND t_dvd.is_delete=0", DvdVO.class, id);
     }
 }

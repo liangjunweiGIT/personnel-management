@@ -6,21 +6,21 @@ import com.ljw.test.pojo.LjwDvd;
  * @Description:
  * @Author Created by junwei.liang on 2018/11/1 16:01
  */
-public class DvdVo extends LjwDvd {
+public class DvdVO extends LjwDvd {
     /**
      * 类型名
      */
-    private Long typeName;
+    private String typeName;
     /**
      * 借出时间
      */
     private String lendDate;
 
-    public Long getTypeName() {
+    public String getTypeName() {
         return typeName;
     }
 
-    public void setTypeName(Long typeName) {
+    public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
 

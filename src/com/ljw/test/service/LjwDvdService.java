@@ -2,7 +2,7 @@ package com.ljw.test.service;
 
 import com.ljw.base.aop.annotation.Transactional;
 import com.ljw.test.pojo.LjwDvd;
-import com.ljw.test.vo.DvdVo;
+import com.ljw.test.vo.DvdVO;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface LjwDvdService {
      *
      * @return
      */
-    List<DvdVo> showAllDVD();
+    List<DvdVO> showAllDVD();
 
     /**
      * 删除一张dvd

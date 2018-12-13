@@ -9,6 +9,7 @@ import com.ljw.test.mgr.DvdMgr;
 import com.ljw.test.pojo.LjwDvd;
 import com.ljw.test.service.LjwDvdService;
 import com.ljw.test.service.impl.LjwDvdServiceImpl;
+import com.ljw.test.vo.DvdVO;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -21,9 +22,12 @@ public class Main {
 
     public static void main(String[] args) {
         InitRun.start();
-        LjwDvdService bean = BeanContainer.getBean(LjwDvdServiceImpl.class);
+        LjwDvdDao dvdDao = BeanContainer.getBean(LjwDvdDaoImpl.class);
+        DvdVO dvdVO = dvdDao.queryDVDById(1L);
+        System.out.println(dvdVO.getTypeName());
+       /* LjwDvdService bean = BeanContainer.getBean(LjwDvdServiceImpl.class);
         bean.test();
-        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MAX_VALUE);*/
        // ((LjwDvdServiceImpl)bean).test();
         //bean.test();
         /*DvdMgr d = (DvdMgr) BeanContainer.getBean(DvdMgr.class);
