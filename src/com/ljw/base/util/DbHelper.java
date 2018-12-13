@@ -40,16 +40,12 @@ public class DbHelper {
 
     static {
         try {
-            for (int i = 0; i < CORE_SIZE; i++) {
-                POOL.add(DbHelper.createConnection());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             Class.forName(PropertiesUtil.getString("DRIVER"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        for (int i = 0; i < CORE_SIZE; i++) {
+            POOL.add(DbHelper.createConnection());
         }
     }
 
@@ -62,6 +58,7 @@ public class DbHelper {
             CURRENT_POOL_SIZE.getAndIncrement();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return con;
     }
