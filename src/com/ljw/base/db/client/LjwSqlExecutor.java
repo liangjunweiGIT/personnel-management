@@ -36,9 +36,10 @@ public class LjwSqlExecutor implements SqlExecutor {
                 isTransaction = false;
             }
             try {
+                SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
                 int count = 0;
                 for (Object object : (List) obj) {
-                    count += executeUpdate(sql, object, con);
+                    count += executeUpdate(sqlModel, object, con);
                 }
                 return count;
             } catch (SQLException e) {
@@ -77,7 +78,8 @@ public class LjwSqlExecutor implements SqlExecutor {
             isTransaction = false;
         }
         try {
-            return executeUpdate(sql, obj, con);
+            SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
+            return executeUpdate(sqlModel, obj, con);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -157,14 +159,14 @@ public class LjwSqlExecutor implements SqlExecutor {
     /**
      * 执行executeUpdate
      *
-     * @param sql
+     * @param sqlModel
      * @param obj
      * @param con
      * @return
      * @throws SQLException
      */
-    private int executeUpdate(String sql, Object obj, Connection con) throws SQLException {
-        SqlModel sqlModel = sqlClient.analyticalSql(sql, "#");
+    private int executeUpdate(SqlModel sqlModel, Object obj, Connection con) throws SQLException {
+
         PreparedStatement ps = con.prepareStatement(sqlModel.getSql());
         setPreparedStatement(ps, sqlModel, obj);
         return ps.executeUpdate();
